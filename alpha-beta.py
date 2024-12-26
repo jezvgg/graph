@@ -141,8 +141,6 @@ def get_score(piece: np.ndarray, player: int):
     if piece.count(player) == 4: score += 99999
     elif piece.count(player) == 3 and piece.count(EMPTY) == 1: score += 100
     elif piece.count(player) == 2 and piece.count(EMPTY) == 2: score += 10
-    if score > 9999: print(score)
-    if score > 99: print(score)
     return score
 
 
@@ -205,22 +203,19 @@ def draw_game(board, turn, game_over=False, AI_move=0):
 
     #  Взял с StackOverflow красивую доску
     for row in board:
-        line = "\033[4;30;47m|\033[0m"
+        line = "|"
         for col, piece in enumerate(row):
             if piece == HUMAN:
                 if col == highlight_index:
                     highlight_index = -1
-                line += "\033[4;34;47m●\033[0m"
+                line += "●"
             elif piece == AI:
                 if col == highlight_index:
-                    line = line[:-19] + "\033[4;31;43m|●|\033[0m"
                     highlight_index = -1
-                    continue
-                else:
-                    line += "\033[4;31;47m●\033[0m"
+                line += "○"
             else:
-                line += "\033[4;30;47m \033[0m"
-            line += "\033[4;30;47m|\033[0m"
+                line += " "
+            line += "|"
         print("                       " + line + "  ")
     print("                        1 2 3 4 5 6 7  ")
 
